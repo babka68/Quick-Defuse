@@ -1,0 +1,184 @@
+﻿"Phrases"
+{
+	"Choose a Wire"
+	{
+		"en"			"Choose a Wire"
+		"ru" 			"Выберите провод"
+		"pl"			"Wybierz kabelek"
+	}
+	
+	"Choose a Wire1"
+	{
+		"en"			"The CT's can try guess this for an instant defuse"
+		"ru" 			"Спецназ может попробовать немедленно разминировать"
+		"pl"			"CT może spróbować odgadnąć kabelek żeby szybko rozbroić bombe"
+	}
+	
+	"Choose a Wire2"
+	{
+		"en"			"Exit, or ignore this for a random wire"
+		"ru" 			"Игнорируйте это, чтобы выбрался случайный провод"
+		"pl"			"Wyjdz, lub ignoruj to żeby wybrać kabelek domyślny"
+	}
+	
+	"Choose a Wire3"
+	{
+		"en"			"Ignore this to defuse normally"
+		"ru" 			"Игнорируйте это, чтобы разминировать обычным нетодом"
+		"pl"			"Zignoruj wybór by rozbroić normalnie"
+	}
+	
+	"Choose a Wire4"
+	{
+		"en"			"Get it right and the bomb is defused"
+		"ru" 			"Если угадаете, то бомба разминируется"
+		"pl"			"Wybierzesz właściwy to rozbroisz bombe"
+	}
+	
+	"Choose a Wire5"
+	{
+		"en"			"Get it wrong and the bomb instantly explodes"
+		"ru" 			"Если нет, то бомба немедленно взорвется"
+		"pl"			"Wybierzesz zły to bomba wybuchnie"
+	}
+	
+	"No Kit1"
+	{
+		"en"			"With no defuse kit you have a 50% chance of the bomb exploding"
+		"ru" 			"Без набора для разминирования у тебя больше 50% шанса детонации"
+		"pl"			"Bez defuza masz 50% szans ze bomba wybuchnie"
+	}
+	
+	"No Kit2"
+	{
+		"en"			"even if you choose the right wire"
+		"ru" 			"даже если выбор будет верным"
+		"pl"			"nawet jeśli wybierzesz odpowiedni kabelek"
+	}
+	
+	"T Choosen1"
+	{
+		"en"			"You chose the"
+		"ru"			"Вы выбрали"
+		"pl"			"Wybraleś"
+	}
+	
+	"T Choosen2"
+	{
+		"en"			"wire"
+		"ru"			"провод"
+		"pl"			"kabelek"
+	}
+	
+	"CT Done1"
+	{
+		"en"			"correct cut the"
+		"ru"			"перерезал верный"
+		"pl"			"poprawnie tnąc"
+	}
+	
+	"CT Done No Kit1"
+	{
+		"en"			"correctly pulled the"
+		"ru"			"удачно вырвал верный"
+		"pl"			"poprawnie wyrwałeś"
+	}
+	
+	"CT Done2"
+	{
+		"en"			"wire for an instant C4 defusal (1:5 odds)"
+		"ru"			"провод и тем самым немедленно обезвредил бомбу"
+		"pl"			"kabelek do szybkiego rozbrojenia C4 (1:5 mozliwości)"
+	}
+	
+	"CT Done No Kit2"
+	{
+		"en"			"wire for an instant C4 defusal (1:10 odds)"
+		"ru"			"провод и тем самым немедленно обезвредил бомбу"
+		"pl"			"kabelek do szybkiego rozbrojenia C4 (1:10 mozliwości)"
+	}
+	
+	"CT Fail1"
+	{
+		"en"			"detonated the C4 with an incorrect wire choice of"
+		"ru"			"активировал бомбу перерезав неверный"
+		"pl"			"zdetonowana C4 z powodu błędnego wyboru kabelka"
+	}
+	
+	"CT Fail No Kit1a"
+	{
+		"en"			"detonated the C4 with an incorrect wire choice of"
+		"ru"			"активировал бомбу вырвав неверный"
+		"pl"			"zdetonowana C4 z powodu błędnego wyboru kabelka"
+	}
+	
+	"CT Fail No Kit1b"
+	{
+		"en"			"chose the correct"
+		"ru"			"неудачно вырвал верный"
+		"pl"			"wybierz odpowiedni"
+	}
+	
+	"CT Fail2"
+	{
+		"en"			"(4:5 odds) The correct wire was"
+		"ru"			"провод. Проводом для деактивации был"
+		"pl"			"(4:5 mozliwości) Poprawnym kabelkiem był"
+	}
+	
+	"CT Fail No Kit2a"
+	{
+		"en"			"(9:10 odds) The correct wire was"
+		"ru"			"провод. Проводом для деактивации был"
+		"pl"			"(9:10 mozliwości) Poprawnym kabelkiem był"
+	}
+	
+	"CT Fail No Kit2b"
+	{
+		"en"			"wire, but the C4 still detonated"
+		"ru"			"провод, что привело к детонации"
+		"pl"			"kabelek, ale C4 i tak wybuchł"
+	}
+	
+	"Blue"
+	{
+		"en"			"Blue"
+		"ru" 			"Синий"
+		"pl"			"Niebieski"
+	}
+	
+	"Red"
+	{
+		"en"			"Red"
+		"ru" 			"Красный"
+		"pl"			"Czerwony"
+	}
+	
+	"Yellow"
+	{
+		"en"			"Yellow"
+		"ru" 			"Желтый"
+		"pl"			"Żółty"
+	}
+	
+	"Green"
+	{
+		"en"			"Green"
+		"ru" 			"Зеленый"
+		"pl"			"Zielony"
+	}
+	
+	"Black"
+	{
+		"en"			"Black"
+		"ru" 			"Черный"
+		"pl"			"Czarny"
+	}
+	
+	"Exit"
+	{
+		"en"			"Exit"
+		"ru" 			"Выход"
+		"pl"			"Wyjdz"
+	}
+}
