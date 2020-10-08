@@ -1,0 +1,156 @@
+﻿"Phrases"
+{
+	"Choose a Wire"
+	{
+		"en"			"Choose a Wire"
+	}
+	
+	"Choose a Wire1"
+	{
+		"en"			"The CT's can try guess this for an instant defuse"
+	}
+	
+	"Choose a Wire2"
+	{
+		"en"			"Exit, or ignore this for a random wire"
+	}
+	
+	"Choose a Wire3"
+	{
+		"en"			"{green} Ignore this to defuse normally"
+	}
+	
+	"Choose a Wire4"
+	{
+		"en"			"{green} Get it right and the bomb is defused"
+	}
+	
+	"Choose a Wire5"
+	{
+		"en"			"{green} Get it wrong and the bomb instantly explodes"
+	}
+	
+	"No Kit1"
+	{
+		"en"			"{green} With no defuse kit you have a 50% chance of the bomb exploding"
+	}
+	
+	"No Kit2"
+	{
+		"en"			"{green} even if you choose the right wire"
+	}
+	
+	"T Choosen1"
+	{
+		"en"			"{green}[QuickDefuse] You chose the"
+	}
+	
+	"T Choosen2"
+	{
+		"en"			"wire"
+	}
+	
+	"CT Done1"
+	{
+		"en"			"{green} correct cut the"
+	}
+	
+	"CT Done No Kit1"
+	{
+		"en"			"{green} correctly pulled the"
+	}
+	
+	"CT Done2"
+	{
+		"en"			"{green}  wire for an instant C4 defusal (1:5 odds)"
+	}
+	
+	"CT Done No Kit2"
+	{
+		"en"			"{green} wire for an instant C4 defusal (1:10 odds)"
+	}
+	
+	"CT Fail1"
+	{
+		"en"			"{green} detonated the C4 with an incorrect wire choice of"
+	}
+	
+	"CT Fail No Kit1a"
+	{
+		"en"			"{green} detonated the C4 with an incorrect wire choice of"
+	}
+	
+	"CT Fail No Kit1b"
+	{
+		"en"			"{green} chose the correct"
+	}
+	
+	"CT Fail2"
+	{
+		"en"			"{green} (4:5 odds) The correct wire was"
+	}
+	
+	"CT Fail No Kit2a"
+	{
+		"en"			"{green} (9:10 odds) The correct wire was"
+	}
+	
+	"CT Fail No Kit2b"
+	{
+		"en"			"{green} wire, but the C4 still detonated"
+	}
+	
+	"Blue"
+	{
+		"en"			"Blue"
+	}
+	"Blue (Menu)"
+	{
+		"en"			"Blue"
+	}
+	
+	"Red"
+	{
+		"en"			"Red"
+	}
+	
+	"Red (Menu)"
+	{
+		"en"			"Red"
+	}
+	
+	"Yellow"
+	{
+		"en"			"Yellow"
+	}
+	
+	"Yellow (Menu)"
+	{
+		"en"			"Yellow"
+	}
+	
+	"Green"
+	{
+		"en"			"Green"
+	}
+	
+	"Green (Menu)"
+	{
+		"en"			"Green"
+	}
+	
+	"Black"
+	{
+		"en"			"Black"
+	}
+	
+	"Black (Menu)"
+	{
+		"en"			"Black"
+	}
+	
+	"Exit"
+	{
+		"en"			"Exit"
+	}
+}
