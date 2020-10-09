@@ -1,4 +1,4 @@
-﻿"Phrases"
+"Phrases"
 {
 	"Choose a Wire"
 	{
@@ -22,7 +22,7 @@
 	
 	"Choose a Wire4"
 	{
-		"en"			{default} Get it right and the bomb is defused"
+		"en"			"{default} Get it right and the bomb is defused"
 	}
 	
 	"Choose a Wire5"
