@@ -10,7 +10,8 @@ int
 		iwire;
 
 Handle
-		hcvar_tchoice;
+		hcvar_tchoice,
+		hcvar_ctnokit;
 
 char	wirecolours[5][] = 
 {
@@ -66,6 +67,7 @@ public void OnPluginStart()
 	HookEvent("bomb_abortplant", Event_Abort);
 	
 	hcvar_tchoice = CreateConVar("qd_tchoice", "1", "Устанавливает, могут ли террористы выбирать цвет провода Быстрая разрядка", _, true, 0.0, true, 1.0);
+	hcvar_ctnokit = CreateConVar("qd_ctnokit", "1", "Обезвреживания без defuse,если 1 - 100%,если 0 - 50% шанс правильного выбора. ", _, true, 0.0, true, 1.0);
 }
 
 public void Event_Plant(Handle event, const char[] name, bool dontBroadcast)
@@ -196,7 +198,7 @@ public int PanelDefuseKit(Handle menu, MenuAction action, int param1, int param2
 			else
 			{
 				SetEntPropFloat(bombent, Prop_Send, "m_flC4Blow", 1.0);
-				if(Engine_Version == GAME_CSGO)CGOPrintToChatAll("{fullred} %s %t %t %t %t", name, "CT Fail1", wirecolours[param2 - 1], "CT Fail2", wirecolours[iwire - 1]);
+				if(Engine_Version == GAME_CSGO)CGOPrintToChatAll("{red} %s %t %t %t %t", name, "CT Fail1", wirecolours[param2 - 1], "CT Fail2", wirecolours[iwire - 1]);
 				else CPrintToChatAll("{fullred} %s %t %t %t %t", name, "CT Fail1", wirecolours[param2 - 1], "CT Fail2", wirecolours[iwire - 1]);
 			}
 		}
@@ -214,7 +216,7 @@ public int PanelNoKit(Handle menu, MenuAction action, int param1, int param2)
 			char name[32];
 			GetClientName(param1, name, sizeof(name));
 			
-			if (param2 == iwire && GetRandomInt(0, 1))
+			if (param2 == iwire && (GetRandomInt(0, 1) || !hcvar_ctnokit))
 			{
 				SetEntPropFloat(bombent, Prop_Send, "m_flDefuseCountDown", 1.0);
 				if(Engine_Version == GAME_CSGO) CGOPrintToChatAll("{lime} %s %t %t %t", name, "CT Done No Kit1", wirecolours[param2 - 1], "CT Done No Kit2");
@@ -225,12 +227,12 @@ public int PanelNoKit(Handle menu, MenuAction action, int param1, int param2)
 				SetEntPropFloat(bombent, Prop_Send, "m_flC4Blow", 1.0);
 				if (param2 != iwire)
 				{
-					if(Engine_Version == GAME_CSGO) CGOPrintToChatAll("{fullred} %s %t %t %t %t", name, "CT Fail No Kit1a", wirecolours[param2 - 1], "CT Fail No Kit2a", wirecolours[iwire - 1]);
+					if(Engine_Version == GAME_CSGO) CGOPrintToChatAll("{red} %s %t %t %t %t", name, "CT Fail No Kit1a", wirecolours[param2 - 1], "CT Fail No Kit2a", wirecolours[iwire - 1]);
 					else CPrintToChatAll("{fullred} %s %t %t %t %t", name, "CT Fail No Kit1a", wirecolours[param2 - 1], "CT Fail No Kit2a", wirecolours[iwire - 1]);
 				}
 				else
 				{
-					if (Engine_Version == GAME_CSGO)CGOPrintToChatAll("{fullred} %s %t %t %t!", name, "CT Fail No Kit1b", wirecolours[param2 - 1], "CT Fail No Kit2b");
+					if (Engine_Version == GAME_CSGO)CGOPrintToChatAll("{red} %s %t %t %t!", name, "CT Fail No Kit1b", wirecolours[param2 - 1], "CT Fail No Kit2b");
 					else CPrintToChatAll("{fullred} %s %t %t %t!", name, "CT Fail No Kit1b", wirecolours[param2 - 1], "CT Fail No Kit2b");
 				}
 			}
