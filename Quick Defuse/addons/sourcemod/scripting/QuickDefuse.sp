@@ -48,7 +48,7 @@ public Plugin myinfo =
 	name = "Quick Defuse", 
 	author = "by pRED, babka68", 
 	description = "Выбор провода,для быстрого обезвреживания.", 
-	version = "1.0", 
+	version = "1.3", 
 	url = "tmb-css.ru"
 };
 
@@ -68,6 +68,8 @@ public void OnPluginStart()
 	
 	hcvar_tchoice = CreateConVar("qd_tchoice", "1", "Устанавливает, могут ли террористы выбирать цвет провода Быстрая разрядка", _, true, 0.0, true, 1.0);
 	hcvar_ctnokit = CreateConVar("qd_ctnokit", "1", "Обезвреживания без defuse,если 1 - 100%,если 0 - 50% шанс правильного выбора. ", _, true, 0.0, true, 1.0);
+	
+	AutoExecConfig(true, "quick_defuse");
 }
 
 public void Event_Plant(Handle event, const char[] name, bool dontBroadcast)
