@@ -218,7 +218,7 @@ public int PanelNoKit(Handle menu, MenuAction action, int param1, int param2)
 			char name[32];
 			GetClientName(param1, name, sizeof(name));
 			
-			if (param2 == iwire && (GetRandomInt(0, 1) || !hcvar_ctnokit))
+			if (param2 == iwire && (GetRandomInt(0, 1) || GetConVarBool(hcvar_ctnokit)))
 			{
 				SetEntPropFloat(bombent, Prop_Send, "m_flDefuseCountDown", 1.0);
 				if(Engine_Version == GAME_CSGO) CGOPrintToChatAll("{lime} %s %t %t %t", name, "CT Done No Kit1", wirecolours[param2 - 1], "CT Done No Kit2");
