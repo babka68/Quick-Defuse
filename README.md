@@ -21,3 +21,10 @@ sm_qd_ct_no_kit "1" // Обезвреживания без defuse,если 1 - 1
 - quick_defuse_cssv34.phrases
 5. Настроить конфиг по пути /cfg/sourcemod/quick_defuse.cfg
 6. Перезапустить сервер.
+
+- Контакты для связи при возникновении проблемы/предложений:
+
+1. Discord babka68#4072
+2. Telegram https://t.me/babka68
+3. Вконтакте https://vk.com/id142504197
+4. WhatsApp: +7 (953) 124-71-33
