@@ -1,9 +1,19 @@
 #include <sdktools_functions>
 #include <multicolors>
 #include <csgo_colors>
+#include <clientprefs>
 
 #pragma semicolon 1
 #pragma newdecls required
+
+#define GAME_UNDEFINED 0
+#define GAME_CSS_34 1
+#define GAME_CSS 2
+#define GAME_CSGO 3
+
+// Cookie
+bool option_quick_defuse[MAXPLAYERS + 1] =  { true, ... };
+Handle cookie_quick_defuse = null;
 
 bool g_bcvar_Tchoice, g_bcvar_CtNoKit;
 int g_iwire;
@@ -17,17 +27,9 @@ char wirecolours_menu[5][] =  {
 
 char Engine_Version;
 
-#define GAME_UNDEFINED 0
-#define GAME_CSS_34 1
-#define GAME_CSS 2
-#define GAME_CSGO 3
-
-int GetCSGame()
-{
-	if (GetFeatureStatus(FeatureType_Native, "GetEngineVersion") == FeatureStatus_Available)
-	{
-		switch (GetEngineVersion())
-		{
+int GetCSGame() {
+	if (GetFeatureStatus(FeatureType_Native, "GetEngineVersion") == FeatureStatus_Available) {
+		switch (GetEngineVersion()) {
 			case Engine_SourceSDK2006:return GAME_CSS_34;
 			case Engine_CSS:return GAME_CSS;
 			case Engine_CSGO:return GAME_CSGO;
@@ -36,22 +38,21 @@ int GetCSGame()
 	return GAME_UNDEFINED;
 }
 
-public Plugin myinfo = 
-{
+public Plugin myinfo =  {
 	name = "Quick defuse", 
 	author = "by pRED, babka68", 
-	description = "Выбор провода,для быстрого обезвреживания.", 
-	version = "1.3", 
+	description = "Выбор провода, для быстрого обезвреживания.", 
+	version = "1.3.1", 
 	url = "https://vk.com/zakazserver68"
 };
 
-public void OnPluginStart()
-{
+public void OnPluginStart() {
 	Engine_Version = GetCSGame();
 	if (Engine_Version == GAME_UNDEFINED)SetFailState("Game is not supported!");
 	if (Engine_Version == GAME_CSS_34)LoadTranslations("quick_defuse_cssv34.phrases");
 	if (Engine_Version == GAME_CSS)LoadTranslations("quick_defuse_css.phrases");
 	if (Engine_Version == GAME_CSGO)LoadTranslations("quick_defuse_csgo.phrases");
+	LoadTranslations("common.phrases");
 	
 	ConVar cvar;
 	cvar = CreateConVar("sm_qd_t_choice", "1", "Дать возможность террористам выбирать провод при закладке бомбы (1 - вкл, 0 - Выкл)", _, true, 0.0, true, 1.0);
@@ -69,6 +70,10 @@ public void OnPluginStart()
 	HookEvent("bomb_abortplant", Event_Abort);
 	
 	AutoExecConfig(true, "quick_defuse");
+	
+	cookie_quick_defuse = RegClientCookie("Quick Defuse On/Off", "", CookieAccess_Private);
+	int info;
+	SetCookieMenuItem(CookieMenuHandler_ShowDamage, info, "Quick Defuse");
 }
 
 public void CVarChanged_TChoice(ConVar cvar, const char[] oldValue, const char[] newValue) {
@@ -79,13 +84,50 @@ public void CVarChanged_Ct_No_Kit(ConVar cvar, const char[] oldValue, const char
 	g_bcvar_CtNoKit = cvar.BoolValue;
 }
 
+public int CookieMenuHandler_ShowDamage(int client, CookieMenuAction action, any info, char[] buffer, int maxlen) {
+	if (action == CookieMenuAction_DisplayOption) {
+		char status[10];
+		if (option_quick_defuse[client]) {
+			Format(status, sizeof(status), "%T", "On", client);
+		}
+		else {
+			Format(status, sizeof(status), "%T", "Off", client);
+		}
+		
+		Format(buffer, maxlen, "%T: %s", "Cookie Quick Defuse", client, status);
+	}
+	// CookieMenuAction_SelectOption
+	else {
+		option_quick_defuse[client] = !option_quick_defuse[client];
+		
+		if (option_quick_defuse[client]) {
+			SetClientCookie(client, cookie_quick_defuse, "On");
+		}
+		else {
+			SetClientCookie(client, cookie_quick_defuse, "Off");
+		}
+		
+		ShowCookieMenu(client);
+	}
+}
+
+public void OnClientCookiesCached(int client) {
+	option_quick_defuse[client] = GetCookieShowDamage(client);
+}
+
+bool GetCookieShowDamage(int client) {
+	char buffer[10];
+	GetClientCookie(client, cookie_quick_defuse, buffer, sizeof(buffer));
+	
+	return !StrEqual(buffer, "Off");
+}
+
 public void Event_Plant(Event event, const char[] name, bool dontBroadcast) {
 	int clientId = event.GetInt("userid"), client = GetClientOfUserId(clientId);
 	char textstring[128];
-	
 	g_iwire = 0;
 	
-	if (g_bcvar_Tchoice) {
+	if (g_bcvar_Tchoice && option_quick_defuse[client]) {
 		SetGlobalTransTarget(client);
 		Panel panel = CreatePanel();
 		
@@ -187,16 +229,16 @@ public int PanelDefuseKit(Handle menu, MenuAction action, int param1, int param2
 			if (param2 == g_iwire) {
 				SetEntPropFloat(bombent, Prop_Send, "m_flDefuseCountDown", 1.0);
 				if (Engine_Version == GAME_CSGO)
-					CGOPrintToChatAll("{lime} %s %t %t %t", name,"CT Done1", wirecolours[param2 - 1], "CT Done2");
+					CGOPrintToChatAll("{lime} %s %t %t %t", name, "CT Done1", wirecolours[param2 - 1], "CT Done2");
 				else
-					CPrintToChatAll("{lime} %s %t %t %t", name,"CT Done1", wirecolours[param2 - 1], "CT Done2");
+					CPrintToChatAll("{lime} %s %t %t %t", name, "CT Done1", wirecolours[param2 - 1], "CT Done2");
 			}
 			else {
 				SetEntPropFloat(bombent, Prop_Send, "m_flC4Blow", 1.0);
 				if (Engine_Version == GAME_CSGO)
-					CGOPrintToChatAll("{red} %s %t %t %t %t", name,"CT Fail1", wirecolours[param2 - 1], "CT Fail2", wirecolours[g_iwire - 1]);
+					CGOPrintToChatAll("{red} %s %t %t %t %t", name, "CT Fail1", wirecolours[param2 - 1], "CT Fail2", wirecolours[g_iwire - 1]);
 				else
-					CPrintToChatAll("{fullred} %s %t %t %t %t", name,"CT Fail1", wirecolours[param2 - 1], "CT Fail2", wirecolours[g_iwire - 1]);
+					CPrintToChatAll("{fullred} %s %t %t %t %t", name, "CT Fail1", wirecolours[param2 - 1], "CT Fail2", wirecolours[g_iwire - 1]);
 			}
 		}
 	}
@@ -213,7 +255,7 @@ public int PanelNoKit(Handle menu, MenuAction action, int param1, int param2) {
 			if (param2 == g_iwire && (GetRandomInt(0, 1) || g_bcvar_CtNoKit)) {
 				SetEntPropFloat(bombent, Prop_Send, "m_flDefuseCountDown", 1.0);
 				if (Engine_Version == GAME_CSGO)
-					CGOPrintToChatAll("{lime} %s %t %t %t", name,"CT Done No Kit1", wirecolours[param2 - 1], "CT Done No Kit2");
+					CGOPrintToChatAll("{lime} %s %t %t %t", name, "CT Done No Kit1", wirecolours[param2 - 1], "CT Done No Kit2");
 				else
 					CPrintToChatAll("{lime} %s %t %t %t", name, "CT Done No Kit1", wirecolours[param2 - 1], "CT Done No Kit2");
 			}
@@ -222,16 +264,16 @@ public int PanelNoKit(Handle menu, MenuAction action, int param1, int param2) {
 				SetEntPropFloat(bombent, Prop_Send, "m_flC4Blow", 1.0);
 				if (param2 != g_iwire) {
 					if (Engine_Version == GAME_CSGO)
-						CGOPrintToChatAll("{red} %s %t %t %t %t", name,"CT Fail No Kit1a", wirecolours[param2 - 1], "CT Fail No Kit2a", wirecolours[g_iwire - 1]);
+						CGOPrintToChatAll("{red} %s %t %t %t %t", name, "CT Fail No Kit1a", wirecolours[param2 - 1], "CT Fail No Kit2a", wirecolours[g_iwire - 1]);
 					else
-						CPrintToChatAll("{fullred} %s %t %t %t %t", name,"CT Fail No Kit1a", wirecolours[param2 - 1], "CT Fail No Kit2a", wirecolours[g_iwire - 1]);
+						CPrintToChatAll("{fullred} %s %t %t %t %t", name, "CT Fail No Kit1a", wirecolours[param2 - 1], "CT Fail No Kit2a", wirecolours[g_iwire - 1]);
 				}
 				
 				else {
 					if (Engine_Version == GAME_CSGO)
-						CGOPrintToChatAll("{red} %s %t %t %t!", name,"CT Fail No Kit1b", wirecolours[param2 - 1], "CT Fail No Kit2b");
+						CGOPrintToChatAll("{red} %s %t %t %t!", name, "CT Fail No Kit1b", wirecolours[param2 - 1], "CT Fail No Kit2b");
 					else
-						CPrintToChatAll("{fullred} %s %t %t %t!", name,"CT Fail No Kit1b", wirecolours[param2 - 1], "CT Fail No Kit2b");
+						CPrintToChatAll("{fullred} %s %t %t %t!", name, "CT Fail No Kit1b", wirecolours[param2 - 1], "CT Fail No Kit2b");
 				}
 			}
 		}
