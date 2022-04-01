@@ -1,4 +1,4 @@
-﻿"Phrases"
+"Phrases"
 {
 	"Choose a Wire"
 	{
@@ -152,5 +152,10 @@
 	"Exit"
 	{
 		"en"			"Exit"
+	}
+	
+	"Cookie Quick Defuse"
+	{
+		"en"			"show panel quick defuse"
 	}
 }
